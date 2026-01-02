@@ -22,8 +22,8 @@ $$\theta_1 = \text{atan2}(Y, X)$$
 
 ### 2. Wrist Center Calculation
 To solve for the elbow and shoulder angles, we first determine the position of the **Wrist Center** ($W_r, W_z$). This decouples the end-effector orientation (controlled by $\alpha$) from the positional arm links.
-$$W_r = \sqrt{X^2 + Y^2} - L_4 \cos(\alpha)$$
-$$W_z = (Z - L_1) - L_4 \sin(\alpha)$$
+$$W_r = \sqrt{X^2 + Y^2} - L_4 \sin(\alpha)$$
+$$W_z = (Z - L_1) + L_4 \cos(\alpha)$$
 
 ### 3. Planar Two-Link IK ($\theta_2, \theta_3$)
 Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the distance to the wrist center ($d$):
@@ -60,3 +60,15 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 ├── style.css     # Styling, layouts, and visual feedback logic
 ├── script.js     # IK algorithms, canvas drawing logic, and event listeners
 └── README.md     # Project documentation
+
+##  Operation
+
+1. Input desired Target Coordinates (X, Y, Z).
+2. Adjust the Wrist Angle (Alpha).
+3. Observe the calculated Joint Angles and the visual simulation.
+
+## Author
+Arafat Hossain
+Mechanical Engineering Student
+
+
