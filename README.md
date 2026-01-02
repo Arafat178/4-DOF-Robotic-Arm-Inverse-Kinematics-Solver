@@ -52,15 +52,6 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 * **Rendering:** HTML5 Canvas API (2D Context)
 
 ---
-
-##  Project Structure
-
-├── index.html    # Main user interface and structure
-├── style.css     # Styling, layouts, and visual feedback logic
-├── script.js     # IK algorithms, canvas drawing logic, and event listeners
-└── README.md     # Project documentation
-
----
 ##  Operation
 
 1. Input desired Target Coordinates (X, Y, Z).
@@ -69,7 +60,7 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 
 ---
 ## Author
-Arafat Hossain
+**Arafat Hossain** \n
 Mechanical Engineering Student
 
 
