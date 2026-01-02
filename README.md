@@ -61,6 +61,7 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 ├── script.js     # IK algorithms, canvas drawing logic, and event listeners
 └── README.md     # Project documentation
 
+---
 ##  Operation
 
 1. Input desired Target Coordinates (X, Y, Z).
