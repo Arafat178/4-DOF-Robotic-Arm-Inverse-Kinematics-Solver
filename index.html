@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-DOF Robot IK Solver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-section">
+        <h2>4-DOF Robot IK  Solver</h2>
+        <button id="btnTheory" class="btn-theory">📘 Theory & Formulas</button>
+    </div>
+
+    <div class="main-container">
+        
+        <div class="section visuals">
+            <canvas id="topView" width="230" height="200"></canvas>
+            <canvas id="sideView" width="250" height="200"></canvas>
+        </div>
+
+        <div class="section input-panel">
+            <h3>Target Position</h3>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>X</label>
+                    <input type="number" id="tx" value="150">
+                </div>
+                <div class="input-group">
+                    <label>Y</label>
+                    <input type="number" id="ty" value="50">
+                </div>
+                <div class="input-group">
+                    <label>Z</label>
+                    <input type="number" id="tz" value="100">
+                </div>
+            </div>
+            <div class="input-group full-width">
+                <label>Alpha (Wrist Angle)</label>
+                <input type="number" id="alpha" value="0">
+            </div>
+        </div>
+
+        <div class="section results-panel">
+            <h3>Joint Angles</h3>
+            <div class="error-msg" id="errorMsg">Out of Reach!</div>
+            
+            <div class="result-grid">
+                <div class="result-box">
+                    <span>Base (&theta;1)</span>
+                    <strong id="th1">0</strong>°
+                </div>
+                <div class="result-box">
+                    <span>Shoulder (&theta;2)</span>
+                    <strong id="th2">0</strong>°
+                </div>
+                <div class="result-box">
+                    <span>Elbow (&theta;3)</span>
+                    <strong id="th3">0</strong>°
+                </div>
+                <div class="result-box">
+                    <span>Wrist (&theta;4)</span>
+                    <strong id="th4">0</strong>°
+                </div>
+            </div>
+        </div>
+
+        <div class="section dimensions-panel">
+            <h3>Robot Dimensions</h3>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>L1</label>
+                    <input type="number" id="l1" value="50">
+                </div>
+                <div class="input-group">
+                    <label>L2</label>
+                    <input type="number" id="l2" value="100">
+                </div>
+                <div class="input-group">
+                    <label>L3</label>
+                    <input type="number" id="l3" value="100">
+                </div>
+                <div class="input-group">
+                    <label>L4</label>
+                    <input type="number" id="l4" value="60">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="theoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Solver Logic & Formulas</h3>
+            
+            <div class="formula-block">
+                <h4>1. Base Rotation (&theta;<sub>1</sub>)</h4>
+                <p>Calculated from Top View (X-Y plane).</p>
+                <code class="math">&theta;<sub>1</sub> = atan2(Y, X)</code>
+            </div>
+
+            <div class="formula-block">
+                <h4>2. Wrist Center (Wr, Wz)</h4>
+                <p>Calculating the wrist joint position relative to the base.</p>
+                <code class="math">
+                    r<sub>target</sub> = &radic;(X<sup>2</sup> + Y<sup>2</sup>)<br>
+                    W<sub>r</sub> = r<sub>target</sub> - L4 &times; sin(&alpha;)<br>
+                    W<sub>z</sub> = (Z - L1) + L4 &times; cos(&alpha;)
+                </code>
+            </div>
+
+            <div class="formula-block">
+                <h4>3. Elbow Angle (&theta;<sub>3</sub>)</h4>
+                <p>Angle between L2 and L3 using Law of Cosines.</p>
+                <code class="math">
+                    d = &radic;(W<sub>r</sub><sup>2</sup> + W<sub>z</sub><sup>2</sup>)<br>
+                    cos(&theta;3) = (L2<sup>2</sup> + L3<sup>2</sup> - d<sup>2</sup>) / (2 &times; L2 &times; L3)<br>
+                    &theta;<sub>3</sub> = acos(cos_angle)
+                </code>
+            </div>
+
+            <div class="formula-block">
+                <h4>4. Shoulder Angle (&theta;<sub>2</sub>)</h4>
+                <p>Angle between L1 (Vertical) and L2.</p>
+                <code class="math">
+                    &Phi;<sub>1</sub> = atan2(W<sub>z</sub>, W<sub>r</sub>)<br>
+                    &Phi;<sub>2</sub> = acos((L2<sup>2</sup> + d<sup>2</sup> - L3<sup>2</sup>) / (2 &times; L2 &times; d))<br>
+                    &theta;<sub>2</sub> = &Phi;<sub>1</sub> + &Phi;<sub>2</sub> + (&pi; / 2)
+                </code>
+            </div>
+
+            <div class="formula-block">
+                <h4>5. Wrist Pitch (&theta;<sub>4</sub>)</h4>
+                <p>Angle between L3 and L4.</p>
+                <code class="math">
+                    &theta;<sub>4</sub> = atan2(W<sub>r</sub>, W<sub>z</sub>) + <br>
+                    acos((L3<sup>2</sup> + d<sup>2</sup> - L2<sup>2</sup>)/(2 &times; L3 &times; d)) + &alpha;
+                </code>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
