@@ -60,7 +60,7 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 
 ---
 ## Author
-**Arafat Hossain** \n
+**Arafat Hossain** <br>
 Mechanical Engineering Student
 
 
