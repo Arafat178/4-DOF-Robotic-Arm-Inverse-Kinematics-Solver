@@ -55,7 +55,6 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 
 ##  Project Structure
 
-```bash
 ├── index.html    # Main user interface and structure
 ├── style.css     # Styling, layouts, and visual feedback logic
 ├── script.js     # IK algorithms, canvas drawing logic, and event listeners
@@ -68,6 +67,7 @@ Using the **Law of Cosines** on the triangle formed by $L_2$, $L_3$, and the dis
 2. Adjust the Wrist Angle (Alpha).
 3. Observe the calculated Joint Angles and the visual simulation.
 
+---
 ## Author
 Arafat Hossain
 Mechanical Engineering Student
